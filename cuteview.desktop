@@ -3,7 +3,6 @@ Encoding=UTF-8
 Name=CuteView
 GenericName=PDF Reader and Image Viewer
 Comment=PDF Reader and Image Viewer
-NoDisplay=true
 Type=Application
 TryExec=cuteview
 Exec=cuteview %F
