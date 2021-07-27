@@ -425,6 +425,40 @@ class TouchViewer(QWidget):
         return True
 
 
+class Window(QMainWindow):
+
+    def __init__(self, pages, toggleCursor):
+        super().__init__()
+        self.toggleCursor = toggleCursor
+        setTitle = lambda t: self.setWindowTitle((t + ' - ' if t else '') + 'CuteView')
+        self.b = TouchViewer(Pages(*pages), setTitle=setTitle)
+        self.setCentralWidget(self.b)
+        #
+        # self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_NoSystemBackground, True)
+        self.setAttribute(Qt.WA_TranslucentBackground, True)
+        # self.setAttribute(Qt.WA_TransparentForMouseEvents)
+        self.setWindowState(Qt.WindowMaximized)
+        # if maximized, must be AFTER setting the translucent background attributes!
+
+    def closeEvent(self, ev):
+        self.b.writeHist()
+
+    def keyReleaseEvent(self, ev):
+        if ev.key() == Qt.Key_Q:
+            if ev.modifiers() == Qt.ShiftModifier:
+                self.closeEvent = lambda ev: None
+            self.close()
+        elif ev.key() == Qt.Key_Left:        self.b.prev()
+        elif ev.key() == Qt.Key_Right:       self.b.next()
+        elif ev.key() == Qt.Key_Asterisk:    self.b.lessOpaque()
+        elif ev.key() == Qt.Key_Slash:       self.b.moreOpaque()
+        # moreOpaque should be easier than lessOpaque; especially for desperate keyboard-mashing
+        elif ev.key() == Qt.Key_AsciiCircum: self.toggleCursor()
+        elif ev.key() == Qt.Key_I:           self.b.toggleInvert()
+        elif ev.key() == Qt.Key_T:           self.b.toggleTrim()
+
+
 app = QApplication(sys.argv)
 pages = sys.argv[1:]
 
@@ -447,37 +481,7 @@ def toggleCursor():
 toggleCursor()  # TODO: make it only hide after a timeout of inactivity
 
 
-w = QMainWindow()
-
-setTitle = lambda t: w.setWindowTitle((t + ' - ' if t else '') + 'CuteView')
-
-b = TouchViewer(Pages(*pages), setTitle=setTitle)
-
-# w.setWindowFlags(Qt.FramelessWindowHint)
-w.setAttribute(Qt.WA_NoSystemBackground, True)
-w.setAttribute(Qt.WA_TranslucentBackground, True)
-# w.setAttribute(Qt.WA_TransparentForMouseEvents)
-w.setWindowState(Qt.WindowMaximized)
-# if maximized, must be AFTER setting the translucent background attributes!
-
-def keyRelease(ev):
-    if   ev.type() == QEvent.KeyRelease:
-        if ev.key() == Qt.Key_Q:
-            if ev.modifiers() == Qt.ShiftModifier:
-                w.closeEvent = lambda ev: None
-            w.close()
-        elif ev.key() == Qt.Key_Left:        b.prev()
-        elif ev.key() == Qt.Key_Right:       b.next()
-        elif ev.key() == Qt.Key_Asterisk:    b.lessOpaque()
-        elif ev.key() == Qt.Key_Slash:       b.moreOpaque()
-        # moreOpaque should be easier than lessOpaque; especially for desperate keyboard-mashing
-        elif ev.key() == Qt.Key_AsciiCircum: toggleCursor()
-        elif ev.key() == Qt.Key_I:           b.toggleInvert()
-        elif ev.key() == Qt.Key_T:           b.toggleTrim()
-w.keyReleaseEvent = keyRelease
-w.closeEvent = lambda ev: b.writeHist()
-
-w.setCentralWidget(b)
+w = Window(pages, toggleCursor)
 w.show()
 
 app.exit(app.exec())
