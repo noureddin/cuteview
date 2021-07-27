@@ -114,6 +114,7 @@ Images mode only:
 
 - Move to previous/next image with the (two-finger) panning gesture, if it goes far enough outside the image to the left/right.
 - Switch to PySimpleGUI.
+- When exactly one file is given as argument, and that file is an image, load all the image files in the same directory (without looking into sub-directories).
 
 ## License
 
