@@ -13,11 +13,8 @@ import sys
 import os
 
 
-if shutil.which('pdfinfo') is None:
-    print("The package 'poppler-tools' is required but not found.", file=sys.stderr)
-    sys.exit(1)
-
-mutool = shutil.which('mutool') is not None
+poppler = shutil.which('pdfinfo') is not None
+mutool  = shutil.which('mutool')  is not None
 if mutool:
     render = lambda longdim, invert, outfile, outfile_base, pdfpath, pageidx: [
         'mutool', 'draw',
@@ -435,8 +432,8 @@ class Window(QMainWindow):
         self.setCentralWidget(self.b)
         #
         # self.setWindowFlags(Qt.FramelessWindowHint)
-        self.setAttribute(Qt.WA_NoSystemBackground, True)
-        self.setAttribute(Qt.WA_TranslucentBackground, True)
+        self.setAttribute(Qt.WA_NoSystemBackground)
+        self.setAttribute(Qt.WA_TranslucentBackground)
         # self.setAttribute(Qt.WA_TransparentForMouseEvents)
         self.setWindowState(Qt.WindowMaximized)
         # if maximized, must be AFTER setting the translucent background attributes!
@@ -466,6 +463,13 @@ pages = sys.argv[1:]
 
 imgs = list(filter(lambda f: not f.lower().endswith('.pdf'), pages))
 pdfs = list(filter(lambda f:     f.lower().endswith('.pdf'), pages))
+
+if pdfs and not poppler:
+    QMessageBox().critical(None, "poppler-tools not found",
+           "The package 'poppler-tools' is required for viewing PDF files, but it is not found.")
+    pdfs = []
+    if not imgs:
+        sys.exit(1)
 
 
 # based with mods on answer by shungo on
