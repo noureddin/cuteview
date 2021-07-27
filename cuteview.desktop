@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=CuteView
+GenericName=PDF Reader and Image Viewer
+Comment=PDF Reader and Image Viewer
+Type=Application
+TryExec=cuteview
+Exec=cuteview %F
+StartupWMClass=CuteView
+Categories=Office;Graphics;Viewer;
+MimeType=application/ico;application/pdf;image/bmp;image/gif;image/ico;image/icon;image/jp2;image/jpeg;image/jpeg2000;image/jpg;image/jpm;image/jpx;image/openraster;image/pjpeg;image/png;image/svg;image/svg+xml;image/svg+xml-compressed;image/svg-xml;image/tiff;image/tiff-fx;image/webp;text/xml-svg;
