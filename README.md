@@ -106,12 +106,18 @@ Images mode only:
 - Simplify the installation procedure. Maybe introduce an installation script instead?
 - Show a "floating toolbar" (like context menu but grid) on double-tapping, to adjust transparency, dark mode, auto-cropping, etc.
 - Switch to PyMuPDF, instead of using system-installed tools.
+- Add an action (button, gesture, etc) to move to the first image/page, and one for the last image/page.
+- Support zooming and panning with mouse only.
+- Support zooming and panning with keyboard only.
 
 ### Maybe do
 
 - Move to previous/next image with the (two-finger) panning gesture, if it goes far enough outside the image to the left/right.
 - Switch to PySimpleGUI.
 - When exactly one file is given as argument, and that file is an image, load all the image files in the same directory (without looking into sub-directories).
+- Add commandline arguments for sorting images: by name, by size, and by modification date.
+- Allow sorting while open, not just before launching (like what the previous point suggests).
+- Make sorting method and direction persistent; i.e., if the user chooses to sort their image by, say, modification date, every time they launch CuteView with images, they are sorted by modification date.
 
 ## License
 
