@@ -440,6 +440,8 @@ class Window(QMainWindow):
         # self.setAttribute(Qt.WA_TransparentForMouseEvents)
         self.setWindowState(Qt.WindowMaximized)
         # if maximized, must be AFTER setting the translucent background attributes!
+        #
+        self.show()
 
     def closeEvent(self, ev):
         self.b.writeHist()
@@ -462,6 +464,9 @@ class Window(QMainWindow):
 app = QApplication(sys.argv)
 pages = sys.argv[1:]
 
+imgs = list(filter(lambda f: not f.lower().endswith('.pdf'), pages))
+pdfs = list(filter(lambda f:     f.lower().endswith('.pdf'), pages))
+
 
 # based with mods on answer by shungo on
 # https://forum.qt.io/topic/28703/how-to-hide-the-cursor-in-qt5
@@ -481,7 +486,12 @@ def toggleCursor():
 toggleCursor()  # TODO: make it only hide after a timeout of inactivity
 
 
-w = Window(pages, toggleCursor)
-w.show()
+w = []
+
+if imgs:
+    w.append(Window(imgs, toggleCursor))
+
+for pdf in pdfs:
+    w.append(Window([pdf], toggleCursor))
 
 app.exit(app.exec())

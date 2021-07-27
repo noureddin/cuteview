@@ -107,8 +107,6 @@ Images mode only:
 - Simplify the installation procedure. Maybe introduce an installation script instead?
 - Show a "floating toolbar" (like context menu but grid) on double-tapping, to adjust transparency, dark mode, auto-cropping, etc.
 - Switch to PyMuPDF, instead of using system-installed tools.
-- Launch a window for every PDF given in the arguments, and remove them from the argument list;
-  e.g., if launched with four PDF files and a number of images, fives windows would be launched: one for each PDF, and one for the images.
 
 ### Maybe do
 
