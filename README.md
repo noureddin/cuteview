@@ -94,6 +94,8 @@ Images mode only:
 - Right Arrow: next page or image
 - Left Arrow: previous page or image
 
+**NOTE:** Transparency only works when viewing PDF in the dark mode.
+
 
 ## Roadmap
 
