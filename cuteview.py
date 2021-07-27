@@ -461,6 +461,19 @@ class Window(QMainWindow):
 app = QApplication(sys.argv)
 pages = sys.argv[1:]
 
+if not pages:
+    imgexts = ' *.'+(' *.'.join(['png', 'jpg', 'gif', 'bmp', 'webp', 'svg', 'svgz']))
+    pages = QFileDialog.getOpenFileNames(None, "Open Images or PDF files", "",
+             ";;".join([
+                 "All Supported Files (*.pdf " + imgexts + ")",
+                 "Image Files (" + imgexts + ")",
+                 "PDF Files (*.pdf)",
+                 "All Files (*.*)",
+             ])
+         )[0]
+    if not pages:  # cancelled
+        sys.exit(0)
+
 imgs = list(filter(lambda f: not f.lower().endswith('.pdf'), pages))
 pdfs = list(filter(lambda f:     f.lower().endswith('.pdf'), pages))
 

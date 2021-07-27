@@ -100,7 +100,6 @@ Images mode only:
 ### Currently work-in-progress
 
 - Make the two-finger panning/zooming gesture behave naturally, more like Gwenview.
-- Show an open dialog if launched without arguments.
 
 ### To-do in the near future
 
