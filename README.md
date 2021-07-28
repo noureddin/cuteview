@@ -5,11 +5,11 @@ Touch-friendly, distraction-free, PDF reader and image viewer for desktop.
 - Both PDF Reader and Image Viewer.
 - Both Touch-friendly and Keyboard-driven.
 - Distraction-free and minimal UI.
-- Dark mode (invert color and grayscale).
+- Night mode (invert color and grayscale).
 - Auto-reloading on file changes.
 - Automatic margin trimming (auto-crop).
 - Transparency.
-- Remembers the last opened page and other preferences (dark mode, auto-crop, transparency) per PDF file.
+- Remembers the last opened page and other preferences (night mode, auto-crop, transparency) per PDF file.
 
 Written in Python 3 using Qt 5 (PyQt5).
 
@@ -86,7 +86,7 @@ Images mode only:
 
 - `q`: exit
 - Shift+`Q`: exit without saving the position and preferences for the current PDF file.
-- `i`: toggle dark mode (grayscale + invert)
+- `i`: toggle night mode (grayscale + invert)
 - `t`: toggle automatic margin trimming (auto-crop)
 - `*`: increase transparency (make the window and page less opaque)
 - `/`: decrease transparency (make the window and page more opaque)
@@ -94,7 +94,7 @@ Images mode only:
 - Right Arrow: next page or image
 - Left Arrow: previous page or image
 
-**NOTE:** Transparency only works when viewing PDF in the dark mode; it neither works with images nor with the light (default) mode.
+**NOTE:** Transparency only works when viewing PDF in the night mode; it neither works with images nor with the light (default) mode.
 
 
 ## Roadmap
@@ -106,7 +106,7 @@ Images mode only:
 ### To-do in the near future
 
 - Simplify the installation procedure. Maybe introduce an installation script instead?
-- Show a "floating toolbar" (like context menu but grid) on double-tapping, to adjust transparency, dark mode, auto-cropping, etc.
+- Show a "floating toolbar" (like context menu but grid) on double-tapping, to adjust transparency, night mode, auto-cropping, etc.
 - Switch to PyMuPDF, instead of using system-installed tools.
 - Add an action (button, gesture, etc) to move to the first image/page, and one for the last image/page.
 - Support zooming and panning with mouse only.
