@@ -74,8 +74,8 @@ Both (PDF and Images) modes:
 
 PDF mode only:
 
-- Single-finger swipe from right to left: next page.
-- Single-finger swipe from left to right: previous page.
+- Single-finger swipe from right to left or from bottom to top: next page.
+- Single-finger swipe from left to right or from top to bottom: previous page.
 
 Images mode only:
 

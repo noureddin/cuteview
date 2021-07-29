@@ -294,7 +294,8 @@ class TouchViewer(QWidget):
     def prev(self): self.setPage(self.pages.prev   (self.longdim()))
     def next(self): self.setPage(self.pages.next   (self.longdim()))
 
-    def longdim(self): return max(self.lbl.height(), self.lbl.width())
+    def longdim(self): return max(self.lbl.height(),  self.lbl.width())
+    def meandim(self): return    (self.lbl.height() + self.lbl.width()) / 2
 
     def setPage(self, pix):
         self.pix = pix
@@ -415,10 +416,16 @@ class TouchViewer(QWidget):
                 elif swipe.horizontalDirection() == QSwipeGesture.Left:  self.next()
         #
         elif ev.type() == QEvent.TouchEnd and self.pages.mode == 'PDF':
+            THR = 0.1
             point = ev.touchPoints()[0]
-            d = point.startNormalizedPos().x() - point.normalizedPos().x()
-            if d >  0.1: self.next()
-            if d < -0.1: self.prev()
+            dx = (point.startScreenPos().x() - point.screenPos().x()) / self.meandim()
+            dy = (point.startScreenPos().y() - point.screenPos().y()) / self.meandim()
+            if abs(dy) < THR:
+                if dx >=  THR: self.next()
+                if dx <= -THR: self.prev()
+            elif abs(dx) < THR:
+                if dy >=  THR: self.next()
+                if dy <= -THR: self.prev()
         return True
 
 
