@@ -481,8 +481,11 @@ if not pages:
     if not pages:  # cancelled
         sys.exit(0)
 
-imgs = list(filter(lambda f: not f.lower().endswith('.pdf'), pages))
-pdfs = list(filter(lambda f:     f.lower().endswith('.pdf'), pages))
+imgs = []
+pdfs = []
+for f in pages:
+    pdfs.append(f) if f.lower().endswith('.pdf') else imgs.append(f)
+
 
 if pdfs and not poppler:
     QMessageBox().critical(None, "poppler-tools not found",
